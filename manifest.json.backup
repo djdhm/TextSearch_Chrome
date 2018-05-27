@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+  
+    "name": "Recherche Texte ALOG",
+    "description": "cette extension permet de faire des recherches dans la page active selon une expression reguliere ",
+    "version": "1.0",
+  
+    "browser_action": {
+     "default_icon": "download.png",
+     "default_popup": "pageprincipale.html"
+    },
+    "permissions": [
+     "activeTab","tabs","<all_urls>"
+     ],
+     "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
+     "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+                ],
+            "js": ["textSearch.js"],
+            "run_at": "document_end"       
+          }
+      ]
+  }
