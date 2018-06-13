@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
   <head>
     <title>Recherche Texte</title>
@@ -10,6 +10,29 @@
     <h1>Bienvenue !</h1>
     <p> Expression Reguliere </p>
     <input type="text" id="expression" />
-    <button id="checkPage">Recherche </button>
+    <button id="checkPage" onclick="alert('test')">Not working </button>
+  </body>
+  <script> 
+  function popup() {
+    alert("envoi depuis le popup")
+    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {"message": "start"});
+   });
+}
+  </script>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <body style="width: 500px">
+      <input type="text" id="expression"/> 
+
+    Open <a href="http://stackoverflow.com" target="_blank">this page</a> and then 
+    <button id="clickme">click me</button>
+    <script type="text/javascript" src="popup.js"></script>
+
+    <button id="activation"> Desavtiver </button>
+    
   </body>
 </html>

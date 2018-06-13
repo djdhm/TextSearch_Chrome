@@ -1,4 +1,5 @@
-# TextSearch_Chrome
+# TextSearch_Chrome V1.0.1
+
 Text search and highlighting  plugin for chrome, first plugin made by me 
 
 ## usage 
