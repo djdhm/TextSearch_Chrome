@@ -1,15 +1,27 @@
 window.onload=function(){
-    //document.body.style.background = 'green';
 
+
+    // Attente de message provenant de l'extension 
+    // ajout un event listener 
     chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 
+        // SI l'action demandé est une recherche alors procéder a la recherche
+        // cette condition est faite pour trier les message 
+        // et permettre d"ajouter d autres traitements 
         if (msg.action == 'rechercher') {
           alert("Message recieved!");
           alert(msg.expression)
-          highlight(msg.expression)
+           $("body").removeHighlight()
+          alert("highlight removed  ")
+           nb=highlight(msg.expression)
+            sendResponse({
+              nombre:nb
+            })
+           
         }else{
             alert("uknown command")
         }
+        return true
       });
 
     window.addEventListener("message", function(event) {
@@ -39,8 +51,8 @@ window.onload=function(){
  
     function highlight(texte){
         
-    $("body").highlight(texte);
-   
+      x= $("body").highlight(texte);
+      return x
 }
 
 

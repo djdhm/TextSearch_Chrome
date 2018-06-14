@@ -16,8 +16,10 @@ Johann Burkard
 
 jQuery.fn.highlight = function(pattern) {
     var regex = typeof(pattern) === "string" ? new RegExp(pattern, "i") : pattern; // assume very LOOSELY pattern is regexp if not string
+    nombreOccurence=0
     function innerHighlight(node, pattern) {
         var skip = 0;
+        
         if (node.nodeType === 3) { // 3 - Text node
             var pos = node.data.search(regex);
             if (pos >= 0 && node.data.length > 0) { // .* matching "" causes infinite loop
@@ -31,6 +33,7 @@ jQuery.fn.highlight = function(pattern) {
                 // parentNode ie. node, now has 3 nodes by 2 splitText()s, replace the middle with the highlighted spanNode:
                 middleBit.parentNode.replaceChild(spanNode, middleBit); 
                 skip = 1; // skip this middleBit, but still need to check endBit
+                nombreOccurence+=1
             }
         } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) { // 1 - Element node
             for (var i = 0; i < node.childNodes.length; i++) { // highlight all children
@@ -40,9 +43,12 @@ jQuery.fn.highlight = function(pattern) {
         return skip;
     }
     
-    return this.each(function() {
+    /* return */ this.each(function() {
         innerHighlight(this, pattern);
     });
+
+    alert(nombreOccurence)
+    return nombreOccurence
 };
 
 jQuery.fn.removeHighlight = function() {
